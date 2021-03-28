@@ -1,10 +1,11 @@
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var engine, world;
-var floor;
+var platform;
 var divisionH = 300
 
 //chips = particles
@@ -16,7 +17,7 @@ var knobs = [];
 var divisions = [];
 
 function setup() {
-  createCanvas(800,400);
+  createCanvas(800,800);
 
   engine = Engine.create();
   world = engine.world;
@@ -45,7 +46,7 @@ function setup() {
     chips.push(new particle(random(width/2-10,width,2+10),10,10));
   }
 
-  floor = new ground(400,390,800,20);
+  platform = new ground(400,790,800,20);
 }
 
 function draw() {
@@ -60,8 +61,10 @@ function draw() {
     knobs[k].display();
   }
 
-  for(var l = 0 ; l < chips.length ; l++){
-    divisions[l].display();
+  if(frameCount>60){
+    for(var l = 0 ; l < chips.length ; l++){
+      divisions[l].display();
+    }
   }
-  floor.display();
+  platform.display();
 }
